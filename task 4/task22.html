@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive UI Components</title>
+  <meta name="description" content="Shoe Hub offers a variety of stylish shoes with a 7-day return policy. Buy 3 get 1 free!">
+  <meta name="keywords" content="shoes, footwear, sneaker, fashion, online store">
+  <meta name="author" content="Shoe Hub">
+  
+  <meta property="og:title" content="Shoe Hub - Your Destination for Stylish Shoes">
+  <meta property="og:description" content="Discover trendy footwear with our easy return policy.">
+  <meta property="og:image" content="path/to/your/image.jpg">
+  <meta property="og:url" content="https://www.shoehub.com">
+  <script src="https://cdn.polyfll.io/v3/polyfll.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .logo {
+      text-align: center;
+    }
+
+    /* Image Slider Styles */
+    .slider {
+      position: relative;
+      max-width: 90%;
+      margin: auto;
+      overflow: hidden;
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .slide {
+      min-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .slide img {
+      width: 100%;
+      height: auto;
+    }
+
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      padding: 16px;
+      margin-top: -22px;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      border-radius: 3px;
+      user-select: none;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .prev {
+      left: 0;
+    }
+
+    .next {
+      right: 0;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 90%;
+      max-width: 600px; /* Limit maximum width */
+    }
+
+    .close-button {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close-button:hover,
+    .close-button:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* Accordion Styles */
+    .accordion-header {
+      background-color: #eee;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      text-align: left;
+      outline: none;
+      font-size: 15px;
+      width: 100%; /* Ensure full-width buttons */
+      box-sizing: border-box; /* Include padding in width */
+    }
+
+    .accordion-content {
+      display: none;
+      padding: 10px;
+      border-top: 1px solid #ddd;
+    }
+
+    .accordion-header[aria-expanded="true"] {
+      background-color: #ddd;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 600px) {
+      .modal-content {
+        width: 95%;
+      }
+
+      .prev, .next {
+        font-size: 14px;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-12" style="background-color: #020202; ">
+          <h2 class="text-center" style="color: #ffffff; font-size: medium;">
+              7 Days Easy Return / Exchange Policy. | For More Details contact us on<br>
+              051-1234567</h2>
+      </div>
+  </div>
+    <div class="row">
+      <div class="col">
+        <h1 class="text-center">SHOE HUB</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="logo">
+        <img src="logooooooooo.png" alt="logo" >
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Image Slider -->
+  <div class="slider">
+    <div class="slides">
+      <div class="slide"><img src="yeezy 350.jpg" alt="Slide 1" loading="lazy"></div>
+      <div class="slide"><img src="jordens.jpg" alt="Slide 2" loading="lazy"></div>
+      <div class="slide"><img src="air.webp" alt="Slide 3" loading="lazy"></div>
+    </div>
+    <a class="prev">&#10094;</a>
+    <a class="next">&#10095;</a>
+  </div>
+
+  <!-- Modal -->
+  <button id="openModal">Special Offer</button>
+  <div id="myModal" class="modal" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal-content">
+      <span class="close-button" aria-label="Close">&times;</span>
+      <h2 id="modalTitle">Special offer</h2>
+      <p>Buy 3 get 1 free</p>
+    </div>
+  </div>
+
+  <!-- Accordion -->
+  <div class="accordion">
+    <button class="accordion-header" aria-expanded="false" aria-controls="section1">Outfit Idea</button>
+    <div id="section1" class="accordion-content" role="region" aria-labelledby="section1-header">
+      <p>Pair classic white sneakers with skinny jeans and a graphic tee for a laid-back weekend look. Add a denim jacket for an extra layer.</p>
+    </div>
+
+    <button class="accordion-header" aria-expanded="false" aria-controls="section2">Storage tips</button>
+    <div id="section2" class="accordion-content" role="region" aria-labelledby="section2-header">
+      <ul>
+        <li>Keep shoes in a cool, dry place.</li>
+        <li>Use shoe trees to maintain shape.</li>
+        <li>Avoid stacking shoes to prevent crushing.</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Image Slider JavaScript
+    const slides = document.querySelector('.slides');
+    const slideCount = document.querySelectorAll('.slide').length;
+    let index = 0;
+
+    function showSlide(n) {
+      if (n >= slideCount) index = 0;
+      else if (n < 0) index = slideCount - 1;
+      else index = n;
+      slides.style.transform = `translateX(${-index * 100}%)`;
+    }
+
+    document.querySelector('.prev').addEventListener('click', () => showSlide(index - 1));
+    document.querySelector('.next').addEventListener('click', () => showSlide(index + 1));
+
+    // Modal JavaScript
+    const modal = document.getElementById('myModal');
+    const openModalButton = document.getElementById('openModal');
+    const closeButton = document.querySelector('.close-button');
+
+    openModalButton.addEventListener('click', function() {
+      modal.style.display = 'block';
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden'; // Prevent background scroll
+    });
+
+    closeButton.addEventListener('click', function() {
+      modal.style.display = 'none';
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = 'auto'; // Allow background scroll
+    });
+
+    // Close modal on clicking outside the content
+    window.addEventListener('click', function(event) {
+      if (event.target === modal) {
+        closeButton.click();
+      }
+    });
+
+    // Focus management
+    modal.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeButton.click();
+      }
+    });
+
+    // Accordion JavaScript
+    document.querySelectorAll('.accordion-header').forEach(button => {
+      button.addEventListener('click', () => {
+        const expanded = button.getAttribute('aria-expanded') === 'true';
+        document.querySelectorAll('.accordion-content').forEach(content => content.style.display = 'none');
+        document.querySelectorAll('.accordion-header').forEach(btn => btn.setAttribute('aria-expanded', 'false'));
+
+        if (!expanded) {
+          button.setAttribute('aria-expanded', 'true');
+          document.getElementById(button.getAttribute('aria-controls')).style.display = 'block';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
