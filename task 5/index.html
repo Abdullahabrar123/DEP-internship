@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Reserve your spot with our easy-to-use reservation form. Fill out your name, email, date, and time for a seamless booking experience.">
+    <title>Reservation Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            color: #333; /* Darker text color for better contrast */
+        }
+
+        .container {
+            max-width: 400px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s; /* Adding transition for box-shadow */
+        }
+
+        .container:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2); /* Deepens shadow on hover */
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px; /* Larger heading for prominence */
+            color: #28a745; /* Green color for branding */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 14px; /* Consistent label size */
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px; /* Increased margin for better spacing */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.2s;
+            font-size: 14px; /* Consistent font size */
+        }
+
+        input:focus {
+            border-color: #28a745;
+            outline: none;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 12px;
+            display: none;
+            margin-top: -5px;
+        }
+
+        button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%; /* Full-width button */
+            font-size: 16px; /* Larger button text */
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        button:hover {
+            background: #218838;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px; /* Reduce padding on small screens */
+            }
+
+            h1 {
+                font-size: 20px; /* Responsive heading size */
+            }
+
+            button {
+                padding: 10px; /* Responsive button padding */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Reservation Form</h1>
+        <form id="reservationForm" novalidate>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <span class="error-message" id="nameError"></span>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <span class="error-message" id="emailError"></span>
+
+            <label for="date">Reservation Date:</label>
+            <input type="date" id="date" name="date" required>
+            <span class="error-message" id="dateError"></span>
+
+            <label for="time">Reservation Time:</label>
+            <input type="time" id="time" name="time" required>
+            <span class="error-message" id="timeError"></span>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('reservationForm');
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const dateInput = document.getElementById('date');
+            const timeInput = document.getElementById('time');
+
+            // Validate inputs on input event
+            nameInput.addEventListener('input', validateName);
+            emailInput.addEventListener('input', validateEmail);
+            dateInput.addEventListener('input', validateDate);
+            timeInput.addEventListener('input', validateTime);
+
+            function validateName() {
+                const nameError = document.getElementById('nameError');
+                if (nameInput.value.trim() === '') {
+                    nameError.textContent = 'Name is required.';
+                    nameError.style.display = 'block';
+                } else {
+                    nameError.style.display = 'none';
+                }
+            }
+
+            function validateEmail() {
+                const emailError = document.getElementById('emailError');
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(emailInput.value)) {
+                    emailError.textContent = 'Please enter a valid email address.';
+                    emailError.style.display = 'block';
+                } else {
+                    emailError.style.display = 'none';
+                }
+            }
+
+            function validateDate() {
+                const dateError = document.getElementById('dateError');
+                if (!dateInput.value) {
+                    dateError.textContent = 'Date is required.';
+                    dateError.style.display = 'block';
+                } else {
+                    dateError.style.display = 'none';
+                }
+            }
+
+            function validateTime() {
+                const timeError = document.getElementById('timeError');
+                if (!timeInput.value) {
+                    timeError.textContent = 'Time is required.';
+                    timeError.style.display = 'block';
+                } else {
+                    timeError.style.display = 'none';
+                }
+            }
+
+            // Handle form submission
+            form.addEventListener('submit', (event) => {
+                let valid = true;
+
+                // Validate each field
+                validateName();
+                validateEmail();
+                validateDate();
+                validateTime();
+
+                // Check for any visible error messages
+                const errors = document.querySelectorAll('.error-message');
+                errors.forEach(error => {
+                    if (error.style.display === 'block') {
+                        valid = false;
+                    }
+                });
+
+                // Prevent form submission if not valid
+                if (!valid) {
+                    event.preventDefault();
+                    alert('Please correct the errors before submitting.');
+                } else {
+                    alert('Form submitted successfully!');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
