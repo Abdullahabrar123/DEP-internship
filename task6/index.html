@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Quote Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 700px;
+        }
+
+        blockquote {
+            font-size: 24px;
+            margin: 20px 0;
+        }
+
+        cite {
+            font-size: 18px;
+            color: #555;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Random Quote Generator</h1>
+        </header>
+        <section id="quote-display">
+            <blockquote id="quote-text"></blockquote>
+            <cite id="quote-author"></cite>
+        </section>
+        <button id="new-quote">Get New Quote</button>
+    </div>
+    <script>
+        // Array of quote objects
+        const quotes = [
+            { text: "The journey of a thousand miles begins with one step.", author: "Lao Tzu" },
+            { text: "That which does not kill us makes us stronger.", author: "Friedrich Nietzsche" },
+            { text: "Life is really simple, but we insist on making it complicated.", author: "Confucius" },
+            { text: "To be yourself in a world that is constantly trying to make you something else is the greatest accomplishment.", author: "Ralph Waldo Emerson" },
+            { text: "Success is not the key to happiness. Happiness is the key to success. If you love what you are doing, you will be successful.", author: "Albert Schweitzer" }
+        ];
+
+        // Function to get a random quote
+        function getRandomQuote() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            return quotes[randomIndex];
+        }
+
+        // Function to update the quote display
+        function updateQuote() {
+            const { text, author } = getRandomQuote();
+            document.getElementById('quote-text').textContent = text;
+            document.getElementById('quote-author').textContent = `— ${author}`;
+        }
+
+        // Add event listener to the button
+        document.getElementById('new-quote').addEventListener('click', updateQuote);
+
+        // Initial quote display
+        updateQuote();
+    </script>
+</body>
+</html>
